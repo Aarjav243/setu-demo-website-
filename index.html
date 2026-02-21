@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Setu</title>
+    <!-- Use Inter font for a modern, premium look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP Core, ScrollTrigger & ScrollToPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+
+    <!-- Lenis for Smooth Scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</head>
+
+<body>
+    <div id="custom-cursor"></div>
+
+    <!-- Hero Scrollytelling Section -->
+    <main class="hero-container">
+        <div class="hero-sticky">
+            <canvas id="hero-canvas"></canvas>
+
+            <!-- A subtle overlay to ensure we can fade gracefully into the content -->
+            <div class="hero-overlay"></div>
+        </div>
+    </main>
+
+    <!-- Content Wrapper (appears after the zoom-through) -->
+    <div class="content-wrapper">
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="about-content">
+                <canvas id="about-ember-canvas"></canvas>
+                <div class="about-list" id="about-text">
+                    <div class="about-list-item">
+                        <strong>Growth Partner:</strong> Helping early-stage businesses grow in a structured and
+                        practical way.
+                    </div>
+                    <div class="about-list-item">
+                        <strong>Founder Focused:</strong> Working closely with founders to understand goals and
+                        challenges.
+                    </div>
+                    <div class="about-list-item">
+                        <strong>Core Pillars:</strong> Supporting businesses across Strategy, Growth, and Execution.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teams Section -->
+        <section class="teams-section">
+            <h2 class="section-title">Our Teams</h2>
+
+            <!-- Marketing Team -->
+            <div class="team-category">
+                <h3 class="category-heading">Marketing</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Khirod Mishra</h4>
+                                <p class="member-role">Marketing</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Saarthak Bhargava</h4>
+                                <p class="member-role">Marketing</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Aanya Hingorani</h4>
+                                <p class="member-role">Marketing</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy Team -->
+            <div class="team-category">
+                <h3 class="category-heading">Strategy</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Navya Holla</h4>
+                                <p class="member-role">Strategy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Apeksha Gandhi</h4>
+                                <p class="member-role">Strategy</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Manan Malik</h4>
+                                <p class="member-role">Strategy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Innovation Team -->
+            <div class="team-category">
+                <h3 class="category-heading">Innovation</h3>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Dhwani B</h4>
+                                <p class="member-role">Innovation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Mudit Kohli</h4>
+                                <p class="member-role">Innovation</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-card-inner">
+                            <div class="team-card-front"></div>
+                            <div class="team-card-back">
+                                <div class="dummy-image"></div>
+                                <h4 class="member-name">Nevan Dhingra</h4>
+                                <p class="member-role">Innovation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section (Animations Only - Option C) -->
+        <section class="impact-section" id="impact-section">
+            <div class="impact-sticky">
+                <div class="impact-fullscreen-container">
+                    <!-- Particle Overlay Canvas -->
+                    <canvas id="particle-canvas"></canvas>
+
+                    <div class="impact-media-wrapper">
+                        <!-- Single canvas for all impact animations -->
+                        <canvas id="impact-canvas" class="impact-media active"></canvas>
+                        <!-- Orange Wash Overlay for Transition -->
+                        <div class="impact-wash" id="impact-wash"></div>
+                    </div>
+
+                    <!-- Subtle Ambient Glow -->
+                    <div class="impact-ambient-glow"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Services Provided Section -->
+    <section class="content-section services-section">
+        <div class="content-container">
+            <h2 class="section-title">Services Provided</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <span class="service-number">01</span>
+                    <h3>Business Consulting</h3>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">02</span>
+                    <h3>Brand Consulting</h3>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">03</span>
+                    <h3>Advertising</h3>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">04</span>
+                    <h3>Non-profit Consulting</h3>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">05</span>
+                    <h3>Marketing Consulting</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Building the Future Section -->
+    <section class="content-section future-section">
+        <div class="content-container">
+            <h2 class="section-title">Building the Future</h2>
+            <div class="future-grid">
+                <div class="future-item">
+                    <div class="bg-glow"></div>
+                    <h3>Strategy</h3>
+                    <p>Turning abstract visions into actionable roadmaps that lead to market leadership.</p>
+                </div>
+                <div class="future-item">
+                    <div class="bg-glow"></div>
+                    <h3>Innovation</h3>
+                    <p>Harnessing emerging technologies to disrupt industries and create new value.</p>
+                </div>
+                <div class="future-item">
+                    <div class="bg-glow"></div>
+                    <h3>Execution</h3>
+                    <p>Bridging the gap between plan and reality with hands-on technical excellence.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
