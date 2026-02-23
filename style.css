@@ -171,17 +171,16 @@ body {
     opacity: 1;
 }
 
-.about-list-item span {
+.about-list-item .char {
     display: inline-block;
     will-change: opacity, transform;
     opacity: 0;
     transition: color 0.3s ease;
 }
 
-.about-list-item strong {
+.about-list-item .char.about-strong {
     color: var(--neon-orange);
     font-weight: 600;
-    margin-right: 0.5rem;
 }
 
 /* 

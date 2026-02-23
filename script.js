@@ -144,26 +144,46 @@ function initAboutEmberAnimation() {
 
     const ctx = canvas.getContext("2d");
 
-    // Split each list item into words, preserving strong tags
+    // Split each list item into characters for a true typewriter feel
     const items = aboutList.querySelectorAll(".about-list-item");
     items.forEach(item => {
         const strong = item.querySelector("strong");
-        const strongText = strong ? strong.innerText : "";
-        const fullText = item.innerText;
-        // Split by words but avoid splitting the strong text internally if possible
-        // Actually simpler: just wrap everything in spans word by word
-        const words = fullText.split(/\s+/);
-        item.innerHTML = words.map(word => {
-            if (strongText && word.includes(strongText.split(/\s+/)[0])) {
-                return `<span class="about-strong">${word}</span>`;
+        const originalHTML = item.innerHTML; // Get original HTML to find strong tag position
+        const fullText = item.innerText; // Get plain text for character splitting
+
+        let charHTML = '';
+        let charIndex = 0;
+        let strongStart = -1;
+        let strongEnd = -1;
+
+        // Find the start and end index of the strong text in the plain text
+        if (strong) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = originalHTML;
+            const strongNode = tempDiv.querySelector('strong');
+            if (strongNode) {
+                const preStrongText = strongNode.previousSibling ? strongNode.previousSibling.textContent : '';
+                strongStart = preStrongText.length;
+                strongEnd = strongStart + strongNode.textContent.length;
             }
-            return `<span>${word}</span>`;
-        }).join(" ");
+        }
+
+        for (let i = 0; i < fullText.length; i++) {
+            const char = fullText[i];
+            const isStrongChar = (i >= strongStart && i < strongEnd);
+
+            if (char === " ") {
+                charHTML += `<span class="char">&nbsp;</span>`;
+            } else {
+                charHTML += `<span class="char ${isStrongChar ? 'about-strong' : ''}">${char}</span>`;
+            }
+        }
+        item.innerHTML = charHTML;
     });
 
-    const spans = aboutList.querySelectorAll("span");
+    const charSpans = aboutList.querySelectorAll(".char");
 
-    // Particle Configuration
+    // Particle Configuration (Keeping Ember Rise)
     let particles = [];
     function resize() {
         canvas.width = canvas.parentElement.offsetWidth;
@@ -211,28 +231,28 @@ function initAboutEmberAnimation() {
     }
     animateParticles();
 
-    // Word Reveal Timeline
-    gsap.to(spans, {
+    // CHARACTER TYPEWRITER TIMELINE (True Typing Effect)
+    gsap.to(charSpans, {
         scrollTrigger: {
             id: "about-trigger",
             trigger: ".about-section",
-            start: "top 75%",
-            end: "bottom 25%",
-            scrub: 1,
+            start: "top 60%", // Start typing when it's mostly in view
+            toggleActions: "play none none reverse", // Play animation naturally, reverse on scroll up
             onUpdate: (self) => {
-                // Dimly light up bullets as we scroll
+                // Dimly light up bullets based on scroll to retain structural highlighting
                 const items = aboutList.querySelectorAll(".about-list-item");
-                const index = Math.floor(self.progress * items.length);
+                const itemIndex = Math.floor(self.progress * items.length);
                 items.forEach((item, i) => {
-                    if (i <= index) item.classList.add('active');
+                    if (i <= itemIndex) item.classList.add('active');
                     else item.classList.remove('active');
                 });
             }
         },
         opacity: 1,
-        color: "#ffffff",
-        textShadow: "0 0 15px rgba(255, 123, 0, 0.6)",
-        stagger: 0.05,
+        color: "#ff7b00", // Glowing orange color as requested
+        textShadow: "0 0 10px #ff7b00, 0 0 20px #ff7b00",
+        duration: 0.01,   // Instantly appear
+        stagger: 0.04,    // Delay between each character to simulate typing
         ease: "none"
     });
 }
@@ -478,14 +498,22 @@ function initImpactAnimation() {
 
 
 /* 
- * 7. Services Section "Fire Border" Animation
+ * 7. Services Section "Slide-In" + "Fire Border" Animation
  */
-gsap.utils.toArray(".service-item").forEach(item => {
-    ScrollTrigger.create({
-        trigger: item,
-        start: "top 85%",
-        onEnter: () => item.classList.add('fire-active'),
-        onLeaveBack: () => item.classList.remove('fire-active')
+gsap.utils.toArray(".service-item").forEach((item, index) => {
+    gsap.from(item, {
+        scrollTrigger: {
+            trigger: item,
+            start: "top 95%",
+            toggleActions: "play none none reverse",
+            onEnter: () => item.classList.add('fire-active'),
+            onLeaveBack: () => item.classList.remove('fire-active')
+        },
+        x: "-100vw", // Enters completely from off-screen left
+        opacity: 0,
+        duration: 1.2,
+        delay: index * 0.1, // Stagger effect
+        ease: "power3.out"
     });
 });
 
